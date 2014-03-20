@@ -1,0 +1,34 @@
+{
+    "name": "dotblue/nette-calendarpicker",
+    "description": "Flexible date (and time) picker for Nette Framework",
+    "type": "library",
+    "keywords": [
+        "date",
+        "time",
+        "datetime",
+        "forms",
+        "nette"
+    ],
+    "license": ["BSD-3-Clause"],
+    "authors": [
+        {
+            "name": "Vojtěch Dobeš",
+            "homepage": "http://github.com/vojtech-dobes"
+        },
+        {
+            "name": "dotBlue",
+            "homepage": "http://dotblue.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dotblue/nette-calendarpicker/issues",
+        "source": "https://github.com/dotblue/nette-calendarpicker"
+    },
+    "require": {
+        "php": ">=5.3",
+        "nette/nette": "~2.1.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
