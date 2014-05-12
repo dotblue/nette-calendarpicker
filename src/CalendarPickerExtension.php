@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Copyright (c) dotBlue (http://dotblue.net)
+ */
+
 namespace DotBlue\Nette\Forms;
 
 use Nette\DI;
