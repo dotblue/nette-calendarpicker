@@ -19,6 +19,8 @@ class CalendarPicker extends BaseControl
 
 	const DEFAULT_MASK_DATE = 'j. n. Y';
 	const DEFAULT_MASK_DATETIME = 'j. n. Y H:i:s';
+	const DEFAULT_INVALID_DATE_MESSAGE = 'Invalid date';
+	const DEFAULT_INVALID_TIME_MESSAGE = 'Invalid time';
 
 	public static $jsConverter = array(
 		'j' => 'd',
@@ -80,16 +82,22 @@ class CalendarPicker extends BaseControl
 	/** @var callable */
 	private $formatDateCallback;
 
+	/** @var string */
+	private $invalidDateMessage;
+
 
 
 	/**
 	 * @param  string|NULL
+	 * @param  string
 	 */
-	public function __construct($label = NULL)
+	public function __construct($label = NULL, $invalidDateMessage = self::DEFAULT_INVALID_DATE_MESSAGE)
 	{
 		parent::__construct($label);
+		$this->invalidDateMessage = $invalidDateMessage;
 		$this->setMask($this->useTime ? self::DEFAULT_MASK_DATETIME : self::DEFAULT_MASK_DATE);
-		$this->addRule($this->validateDate);
+		$this->addCondition(Form::FILLED)
+			->addRule($this->validateDate, $this->invalidDateMessage);
 
 		$this->parseDateCallback = array($this, 'parseDate');
 		$this->formatDateCallback = array($this, 'formatDate');
@@ -129,15 +137,17 @@ class CalendarPicker extends BaseControl
 	 * Adds UI for setting time of day.
 	 * Don't forget to set correct mask if you don't use default one.
 	 *
+	 * @param  string
 	 * @return CalendarPicker provides a fluent interface
 	 */
-	public function useTime()
+	public function useTime($invalidTimeMessage = self::DEFAULT_INVALID_TIME_MESSAGE)
 	{
 		$this->useTime = TRUE;
 		if ($this->phpMask === self::DEFAULT_MASK_DATE) {
 			$this->setMask(self::DEFAULT_MASK_DATETIME);
 		}
-		$this->addRule($this->validateTime);
+		$this->addCondition(Form::FILLED)
+			->addRule($this->validateTime, $invalidTimeMessage);
 		return $this;
 	}
 
@@ -361,8 +371,8 @@ class CalendarPicker extends BaseControl
 
 	public static function register($methodName = 'addCalendarPicker')
 	{
-		Container::extensionMethod($methodName, function (Container $_this, $name, $label = NULL) {
-			return $_this[$name] = new CalendarPicker($label);
+		Container::extensionMethod($methodName, function (Container $_this, $name, $label = NULL, $invalidDateMessage = CalendarPicker::DEFAULT_INVALID_DATE_MESSAGE) {
+			return $_this[$name] = new CalendarPicker($label, $invalidDateMessage);
 		});
 	}
 
