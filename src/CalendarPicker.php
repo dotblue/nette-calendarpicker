@@ -6,6 +6,8 @@
 
 namespace DotBlue\Nette\Forms;
 
+use DateTime;
+use InvalidArgumentException;
 use Nette;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Container;
@@ -163,6 +165,11 @@ class CalendarPicker extends BaseControl
 			} else {
 				$date = Nette\DateTime::from($value);
 			}
+
+			if (!$date instanceof DateTime) {
+				throw new InvalidArgumentException("Invalid input for calendar picker: '$value'");
+			}
+
 			$this->year = $date->format('Y');
 			$this->month = $date->format('n');
 			$this->day = $date->format('j');
