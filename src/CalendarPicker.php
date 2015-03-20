@@ -132,7 +132,7 @@ class CalendarPicker extends BaseControl
 	 */
 	public function useTime()
 	{
-		$this->useTime = $useTime;
+		$this->useTime = TRUE;
 		if ($this->phpMask === self::DEFAULT_MASK_DATE) {
 			$this->setMask(self::DEFAULT_MASK_DATETIME);
 		}
