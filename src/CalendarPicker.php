@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use Nette;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Container;
+use Nette\Forms\Form;
 
 
 class CalendarPicker extends BaseControl
@@ -153,6 +154,26 @@ class CalendarPicker extends BaseControl
 		$this->phpMask = $phpMask;
 		$this->jsMask = $this->createJsMask($phpMask);
 		return $this;
+	}
+
+
+
+	public function loadHttpData()
+	{
+		$value = Nette\DateTime::createFromFormat(
+			$this->phpMask,
+			$this->getHttpData(Form::DATA_LINE)
+		);
+		if ($value !== FALSE) {
+			$this->year = $value->format('Y');
+			$this->month = $value->format('n');
+			$this->day = $value->format('j');
+			if ($this->useTime) {
+				$this->hour = $value->format('G');
+				$this->minute = (int) $value->format('i');
+				$this->second = (int) $value->format('s');
+			}
+		}
 	}
 
 
