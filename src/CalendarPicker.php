@@ -174,9 +174,9 @@ class CalendarPicker extends BaseControl
 			$this->month = $date->format('n');
 			$this->day = $date->format('j');
 			if ($this->useTime) {
-				$this->day = $date->format('G');
-				$this->day = (int) $date->format('i');
-				$this->day = (int) $date->format('s');
+				$this->hour = $date->format('G');
+				$this->minute = (int) $date->format('i');
+				$this->second = (int) $date->format('s');
 			}
 		} else {
 			$this->year = $this->month = $this->day = NULL;
