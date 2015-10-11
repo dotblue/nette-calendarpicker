@@ -6,12 +6,12 @@
 
 namespace DotBlue\Nette\Forms;
 
-use DateTime;
 use InvalidArgumentException;
 use Nette;
 use Nette\Forms\Controls\BaseControl;
 use Nette\Forms\Container;
 use Nette\Forms\Form;
+use Nette\Utils\DateTime;
 
 
 class CalendarPicker extends BaseControl
@@ -170,7 +170,7 @@ class CalendarPicker extends BaseControl
 
 	public function loadHttpData()
 	{
-		$value = Nette\DateTime::createFromFormat(
+		$value = DateTime::createFromFormat(
 			$this->phpMask,
 			$this->getHttpData(Form::DATA_LINE)
 		);
@@ -194,7 +194,7 @@ class CalendarPicker extends BaseControl
 			if (is_string($value)) {
 				$date = call_user_func($this->parseDateCallback, $this->phpMask, $value);
 			} else {
-				$date = Nette\DateTime::from($value);
+				$date = DateTime::from($value);
 			}
 
 			if (!$date instanceof DateTime) {
@@ -347,7 +347,7 @@ class CalendarPicker extends BaseControl
 	 */
 	public function parseDate($phpMask, $value)
 	{
-		return Nette\DateTime::createFromFormat($phpMask, $value);
+		return DateTime::createFromFormat($phpMask, $value);
 	}
 
 
