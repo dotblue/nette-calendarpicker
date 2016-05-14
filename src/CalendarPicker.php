@@ -97,7 +97,7 @@ class CalendarPicker extends BaseControl
 		$this->invalidDateMessage = $invalidDateMessage;
 		$this->setMask($this->useTime ? self::DEFAULT_MASK_DATETIME : self::DEFAULT_MASK_DATE);
 		$this->addCondition(Form::FILLED)
-			->addRule($this->validateDate, $this->invalidDateMessage);
+			->addRule(array($this, 'validateDate'), $this->invalidDateMessage);
 
 		$this->parseDateCallback = array($this, 'parseDate');
 		$this->formatDateCallback = array($this, 'formatDate');
@@ -147,7 +147,7 @@ class CalendarPicker extends BaseControl
 			$this->setMask(self::DEFAULT_MASK_DATETIME);
 		}
 		$this->addCondition(Form::FILLED)
-			->addRule($this->validateTime, $invalidTimeMessage);
+			->addRule(array($this, 'validateTime'), $invalidTimeMessage);
 		return $this;
 	}
 
