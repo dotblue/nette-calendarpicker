@@ -26,7 +26,9 @@
     },
     "require": {
         "php": ">=5.3",
-        "nette/nette": ">=2.1.0,<2.3.0"
+        "nette/di": "~2.4",
+        "nette/forms": "~2.4",
+        "nette/utils": "~2.4"
     },
     "autoload": {
         "classmap": ["src/"]
